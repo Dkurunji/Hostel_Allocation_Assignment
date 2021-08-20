@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React,{useState} from 'react';
 import SignInPage from './pages/SignInPage';
 import {BrowserRouter, Switch,Route, Link} from "react-router-dom";
 import { Home } from './pages/Home';
@@ -11,9 +11,21 @@ import NavBar from './components/NavBar';
 export const HostelContext = React.createContext();
 function App() {
 
+  let [bookedR, setBookedRoom] = useState(false);
+  let [selectedMale, setSelectedMale] = useState(true);
+
+  const bookStatus = function(){
+    setBookedRoom(!bookedR);
+  }
+  const genderHandler = function(){
+    setSelectedMale(!selectedMale);
+  }
+
+
   return (
     
-    <HostelContext.Provider value={{ isSigned: false, selectedBoys: true, booked:[], floor:1,}}>
+    <HostelContext.Provider value={{
+      isSigned: false, selectedBoys: true, booked: [], floor: 1, bookedRoom: bookedR, bookStatus: bookStatus, male:selectedMale, setGender:genderHandler }}>
         {/* <div className="App">      
             
         
